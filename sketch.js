@@ -119,11 +119,11 @@ function draw(){
   background(backgroundIMG);
 
   //create TimeUsed for feedback
-  TimeUsed=Math.round(World.frameCount/60)
+  TimeUsed=Math.round(getFrameRate())
   console.log(TimeUsed)
   textSize(30)
-textStyle(BOLD)
-text("Time Used: "+TimeUsed,30,30)
+  textStyle(BOLD)
+  text("Time Used: "+TimeUsed,30,30)
   //add Controls for FireCircle
   if(keyDown(LEFT_ARROW)&&gameState===0){
     FireCircle.x=FireCircle.x-5
@@ -143,10 +143,21 @@ FireCircle.collide(ground3)
 FireCircle.collide(ground4)
 FireCircle.collide(balancerVanisher)
 //&&gameState===0&&FireCircle.isTouching(ground)||keyDown(UP_ARROW)&&gameState===0&&FireCircle.isTouching(ground1)||keyDown(UP_ARROW)&&gameState===0&&FireCircle.isTouching(ground2)||keyDown(UP_ARROW)&&gameState===0&&FireCircle.isTouching(ground3)||keyDown(UP_ARROW)&&gameState===0&&FireCircle.isTouching(ground4)||keyDown(UP_ARROW)&&gameState===0&&FireCircle.isTouching(balancerVanisher)
-if(keyDown(UP_ARROW)){
+if(keyDown(UP_ARROW)&&gameState===0&&FireCircle.y===ground3.y<+3&&FireCircle.y===ground3.y>-3){
   FireCircle.velocityY=-16;
 }
-
+if(keyDown(UP_ARROW)&&gameState===0&&FireCircle.y===ground1.y<+3&&FireCircle.y===ground1.y>-3){
+  FireCircle.velocityY=-16
+}
+if(keyDown(UP_ARROW)&&gameState===0&&FireCircle.y===ground2.y<+3&&FireCircle.y===ground2.y>-3){
+  FireCircle.velocityY=-16
+}
+if(keyDown(UP_ARROW)&&gameState===0&&FireCircle.y===ground.y<+3&&FireCircle.y===ground.y>-3){
+  FireCircle.velocityY=-16
+}
+//if(keyDown(UP_ARROW)&&gameState===0&&FireCircle.y===ground.y<+3&&FireCircle.y===ground.y>-3){
+ // FireCircle.velocityY=-16
+//}
   //Add controls for WaterCircle
  if(keyDown("A")&&gameState===0||keyDown("a")&&gameState===0){
    waterCircle.x=waterCircle.x-5;
@@ -170,19 +181,6 @@ if(keyDown(UP_ARROW)){
     doorGroup.destroyEach()
    // FireCircleDoor.shapeColor="black"
    // WaterCircleDoor.shapeColor="black"
-  }
-  if(gameState===2){
-    background("white")
-    console.log(gameState)
-    text("Congratulations You won Your Time Used is: "+TimeUsed,400,400)
-    if(TimeUsed<=60){
-  text("congratulations You achieved the golden diamond",300,300)
-    }
-    else if(TimeUsed<=120&&TimeUsed>=60){
-      text("Congratulations You achieved the silver diamond",300,300)
-    } else if(TimeUsed>=120){
-      text("Congratulations You achieved the bronze diamond",300,300)
-    }
   }
  //debug the below commented section
  //try to end the game if firecircle is touching the water
@@ -249,31 +247,71 @@ if(keyDown(UP_ARROW)){
     //PaddleBasedWallButton2.destroy()
     background("white")
     }
- if(gameState===1){
+ /*if(gameState===1){
    background("white")
-   text("You lose Time USED:"+TimeUsed+"to play again press ctrl+r",400,400)
+   text("You lose",400,400) 
+   text("Time USED:"+TimeUsed+"to play again press ctrl+r",400,400)
    FireCircle.destroy();
    waterCircle.destroy();
    ground1.destroy();
    ground.destroy();
-   ground2.destroy()
-   ground3.destroy()
+  ground2.destroy()
+ground3.destroy()
    ground4.destroy()
-   waterGroup.destroyEach()
+  waterGroup.destroyEach()
    fireGroup.destroyEach()
-   balancerVanisher.destroyEach()
-   //fire.destroy()
-  // goose.destroy()
+  balancerVanisher.destroyEach()
+   fire.destroy()
    goose.destroy()
+  goose.destroy()
    gameState=1;
-  // PaddleBasedWall.destroy()
-   //PaddleBasedWallButton1.destroy()
-   //PaddleBasedWallButton2.destroy()
-   //background("white")
- }
+  PaddleBasedWall.destroy()
+   PaddleBasedWallButton1.destroy()
+   PaddleBasedWallButton2.destroy()
+   background("white")
+ }*/
  //call a function drawSprites to draw objects/elements of the game
  console.log(gameState)
 drawSprites()
+if(gameState===2){
+  //background("white")
+  console.log(gameState)
+  text("Congratulations You won Your Time Used is: "+TimeUsed,400,400)
+  if(TimeUsed<=60){
+text("congratulations You achieved the golden diamond",300,300)
+text("Congratulations You achieved the silver diamond",200,200)
+text("Congratulations You achieved the bronze diamond",100,100)
+  }
+  else if(TimeUsed<=120&&TimeUsed>=60){
+    text("Congratulations You achieved the silver diamond",300,300)
+    text("Congratulations You achieved the bronze diamond",200,200)
+  } else if(TimeUsed>=120){
+    text("Congratulations You achieved the bronze diamond",300,300)
+  }
+}
+}
+if(gameState===1){
+  //background("white")
+  text("You lose",400,400) 
+  text("Time USED:"+TimeUsed+"to play again press ctrl+r",400,400)
+  FireCircle.destroy();
+  waterCircle.destroy();
+  ground1.destroy();
+  ground.destroy();
+  ground2.destroy()
+  ground3.destroy()
+  ground4.destroy()
+  waterGroup.destroyEach()
+  fireGroup.destroyEach()
+  balancerVanisher.destroyEach()
+  //fire.destroy()
+ // goose.destroy()
+  goose.destroy()
+  gameState=1;
+ // PaddleBasedWall.destroy()
+  //PaddleBasedWallButton1.destroy()
+  //PaddleBasedWallButton2.destroy()
+  //background("white")
 }
 //end function draw
 
